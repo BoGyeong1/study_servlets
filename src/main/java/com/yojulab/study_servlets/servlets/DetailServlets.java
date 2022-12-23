@@ -27,9 +27,7 @@ public class DetailServlets extends HttpServlet {
         HashMap<String, Object> question = null;
         try {
             question = pollWithDB.getQuestion(questions_Uid);
-            System.out.println(question.get("QUESTIONS"));
-            System.out.println(question.get("QUESTIONS_UID"));
-            System.out.println(question.get("ORDERS"));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
