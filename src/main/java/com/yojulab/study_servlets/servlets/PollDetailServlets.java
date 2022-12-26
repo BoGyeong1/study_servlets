@@ -3,6 +3,7 @@ package com.yojulab.study_servlets.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.yojulab.study_servlets.dao.PollWithDB;
@@ -15,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/polls/PollServlet")
-public class DetailServlets extends HttpServlet {
+public class PollDetailServlets extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -25,8 +26,10 @@ public class DetailServlets extends HttpServlet {
         // biz with DB and Class
         PollWithDB pollWithDB = new PollWithDB();
         HashMap<String, Object> question = null;
+        ArrayList<HashMap> answer_list = null;
         try {
             question = pollWithDB.getQuestion(questions_Uid);
+            answer_list = pollWithDB.getAnswer(questions_Uid);
 
         } catch (SQLException e) {
             e.printStackTrace();
