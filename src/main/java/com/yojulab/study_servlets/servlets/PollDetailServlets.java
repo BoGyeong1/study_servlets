@@ -37,6 +37,7 @@ public class PollDetailServlets extends HttpServlet {
 
         // Output with html
         request.setAttribute("questions", question);
+        request.setAttribute(" answer_list", answer_list);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/polls/details.jsp");
         requestDispatcher.forward(request, response);
     }

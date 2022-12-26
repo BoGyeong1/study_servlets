@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.HashMap, java.util.ArrayList" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +12,7 @@
   <body>
 
   <% HashMap<String, Object> question = (HashMap<String, Object>)request.getAttribute("questions");%>
+  <% ArrayList<HashMap> answer_list = (ArrayList<HashMap>)request.getAttribute("answer_list"); %>
     <div>
     <a href="/polls/PollServlet?QUESTIONS_UID=Q1">Q1</a>
     <a href="/polls/PollServlet?QUESTIONS_UID=Q2">Q2</a>
@@ -22,8 +23,13 @@
     <div>
      <%= question.get("ORDERS") %>. <%= question.get("QUESTIONS")%>
     </div>
-    <div>(1) 전혀아니다.</div>
-    <div>(2) 아니다.</div>
-    <div>(3) 보통이다.</div>
+    <div>
+<% for(int i = 0 ; i < answer_list.size(); i++){ %>
+<% HashMap<String, Object> answers = answer_list.get(i); %>
+<% int order = (int)answers.get("ORDERS"); %>
+<% String example = (String)answers.get("EXAMPLE"); %>
+  <div> (<%= order %>) <%= example %> </div>
+<% } %>
+</div>
   </body>
 </html>
